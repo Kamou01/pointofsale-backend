@@ -122,6 +122,35 @@ def user_registration():
     return response
 
 
+#   Route for the user to login.
+@app.route("/user_login/", methods=["POST"])
+#   Function to register user
+def user_login():
+    response = {}
+
+    if request.method == "POST":
+        entered_username = request.json['username']
+        entered_password = request.json['password']
+
+        with sqlite3.connect("pointofsale.db") as connection:
+
+            cursor = connection.cursor()
+            cursor.execute("SELECT * FROM user WHERE username=? AND password=?", (entered_username,
+                                                                                   entered_password))
+            table_info = cursor.fetchone()
+
+            response["status_code"] = 200
+            response["message"] = "User logged in successfully"
+            response["user"] = table_info
+        return response
+
+    else:
+        response["status_code"] = 404
+        response["user"] = "user not found"
+        response["message"] = "User logged in unsuccessfully"
+    return response
+
+
 @app.route('/adding_product/', methods=["POST"])
 def add_products():
     response = {}
@@ -147,7 +176,7 @@ def add_products():
         return response
 
 
-@app.route('/delete_product/<int:id>/')
+@app.route('/delete_product/<int:product_id>/')
 def delete_products(product_id):
     response = {}
 
