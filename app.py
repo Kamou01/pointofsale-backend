@@ -222,7 +222,7 @@ def update_products(id):
 
                 with sqlite3.connect('pointofsale.db') as connection:
                     cursor = connection.cursor()
-                    cursor.execute("UPDATE products SET name =? WHERE id", (put_data["name"], id))
+                    cursor.execute("UPDATE products SET name =? WHERE id=?", (put_data["name"], id))
 
                     conn.commit()
                     response['message'] = "Update was successful"
@@ -244,7 +244,7 @@ def update_products(id):
 
                 with sqlite3.connect('pointofsale.db') as connection:
                     cursor = connection.cursor()
-                    cursor.execute("UPDATE products SET description =? WHERE id", (put_data["description"], id))
+                    cursor.execute("UPDATE products SET description =? WHERE id=?", (put_data["description"], id))
 
                     conn.commit()
                     response['message'] = "Update was successful"
@@ -255,7 +255,7 @@ def update_products(id):
 
                 with sqlite3.connect('pointofsale.db') as connection:
                     cursor = connection.cursor()
-                    cursor.execute("UPDATE products SET category =? WHERE id", (put_data["category"], id))
+                    cursor.execute("UPDATE products SET category =? WHERE id=?", (put_data["category"], id))
                     conn.commit()
                     response['message'] = "Update was successful"
                     response['status_code'] = 200
@@ -265,7 +265,7 @@ def update_products(id):
 
                 with sqlite3.connect('pointofsale.db') as connection:
                     cursor = connection.cursor()
-                    cursor.execute("UPDATE products SET image =? WHERE id", (put_data["image"], id))
+                    cursor.execute("UPDATE products SET image =? WHERE id=?", (put_data["image"], id))
                     conn.commit()
                     response['message'] = "Update was successful"
                     response['status_code'] = 200
